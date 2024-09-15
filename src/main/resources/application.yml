@@ -1,0 +1,13 @@
+env:
+  variable:
+    db:
+      url: jdbc:postgresql://localhost:5432/usa-cities
+      username: postgres
+      password: Karimberdi0309
+
+
+openai:
+  api:
+    url: https://api.openai.com/v1/engines/gpt-4o-mini/completions
+    key: sk-mvOdnz6TerEKcGPrpzUHBLOnU6paHX_Dkz7jQ7Bl0kT3BlbkFJze3VbyjDEFD9Uw6udQY-hXDuxlShMFf2PPvNYz3lQA
+  model: gpt-4o-mini

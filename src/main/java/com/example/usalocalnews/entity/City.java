@@ -4,12 +4,11 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
-@Entity  // Marks this class as a JPA entity
+@Entity(name = "cities")
 public class City {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto-increment primary key
-    private Long id;
+    private String id;
 
     private String city;
     private String city_ascii;
@@ -22,8 +21,8 @@ public class City {
     private String population;
     private String density;
     private String source;
-    private boolean military;
-    private boolean incorporated;
+    private String military;
+    private String incorporated;
     private String timezone;
     private String ranking;
     @Column(length = 2000)
@@ -33,7 +32,7 @@ public class City {
 
     }
 
-    public City(Long id, String city, String city_ascii, String state_id, String state_name, String county_fips, String county_name, String lat, String lng, String population, String density, String source, boolean military, boolean incorporated, String timezone, String ranking, String zips) {
+    public City(String id, String city, String city_ascii, String state_id, String state_name, String county_fips, String county_name, String lat, String lng, String population, String density, String source, String military, String incorporated, String timezone, String ranking, String zips) {
         this.id = id;
         this.city = city;
         this.city_ascii = city_ascii;
@@ -53,11 +52,11 @@ public class City {
         this.zips = zips;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -149,19 +148,19 @@ public class City {
         this.source = source;
     }
 
-    public boolean isMilitary() {
+    public String isMilitary() {
         return military;
     }
 
-    public void setMilitary(boolean military) {
+    public void setMilitary(String military) {
         this.military = military;
     }
 
-    public boolean isIncorporated() {
+    public String isIncorporated() {
         return incorporated;
     }
 
-    public void setIncorporated(boolean incorporated) {
+    public void setIncorporated(String incorporated) {
         this.incorporated = incorporated;
     }
 

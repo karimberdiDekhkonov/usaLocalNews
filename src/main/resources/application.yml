@@ -1,9 +1,13 @@
 env:
   variable:
     db:
-      url: jdbc:postgresql://localhost:5432/usa-cities
+#      url: jdbc:postgresql://localhost:5432/usa-cities
+#      username: postgres
+#      password: Karimberdi0309
+
+      url: jdbc:postgresql://autorack.proxy.rlwy.net:57062/railway
       username: postgres
-      password: Karimberdi0309
+      password: EhxSyzWEdQgPEryklWeTlJTbiYZfCHbJ
 
 
 openai:
@@ -11,3 +15,9 @@ openai:
     url: https://api.openai.com/v1/engines/gpt-4o-mini/completions
     key: sk-mvOdnz6TerEKcGPrpzUHBLOnU6paHX_Dkz7jQ7Bl0kT3BlbkFJze3VbyjDEFD9Uw6udQY-hXDuxlShMFf2PPvNYz3lQA
   model: gpt-4o-mini
+
+
+api:
+  rapid:
+    key: 9c2eed0341msh34f4ba6bee75311p1bcad0jsn8a024c569d9d
+    host: google-news13.p.rapidapi.com

@@ -1,8 +1,8 @@
 package com.example.usalocalnews.controller;
 
+import com.example.usalocalnews.model.NewsDto;
 import com.example.usalocalnews.service.CityService;
 import com.example.usalocalnews.service.NewsService;
-import com.example.usalocalnews.service.OpenAIService;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -25,8 +25,6 @@ public class CityController {
     private CityService cityService;
     @Autowired
     private NewsService newsService;
-    @Autowired
-    private OpenAIService openAIService;
 
     //SEARCHING FOR CITIES
     @GetMapping("/cities/{startsWith}")
@@ -37,26 +35,19 @@ public class CityController {
         return ResponseEntity.ok(citiesOutput);
     }
 
-    //GETTING NEWS WITH CITY NAME
+    // GETTING NEWS WITH CITY NAME AND PAGE NUMBER
     @GetMapping("/news")
-    public HttpEntity<List<JsonNode>> getNews(@RequestParam String keyword) throws IOException {
-        logger.info("Received request to get news for city: {}", keyword);
-        List<JsonNode> news = newsService.getNews(keyword);
-        logger.info("Returning {} news articles for city: {}", news.size(), keyword);
-        return ResponseEntity.ok(news);
-    }
+    public HttpEntity<List<NewsDto>> getNews(@RequestParam String keyword, @RequestParam(defaultValue = "1") int page) throws IOException {
+        // LOG THE REQUEST FOR NEWS WITH THE GIVEN KEYWORD AND PAGE
+        logger.info("Received request to get news for city: {} on page: {}", keyword, page);
 
-    //IMPLEMENTING AI TO CHECK NEWS
-    @GetMapping("/ask")
-    public String askQuestion(@RequestParam String prompt) {
-        logger.info("Received AI question prompt: {}", prompt);
-        try {
-            String response = openAIService.getGPT4Response(prompt);
-            logger.info("Returning AI response.");
-            return response;
-        } catch (Exception e) {
-            logger.error("Error occurred while processing AI request: {}", e.getMessage(), e);
-            return "Error occurred while processing your request.";
-        }
+        // CALL THE SERVICE TO GET THE NEWS BASED ON THE KEYWORD AND PAGE
+        List<NewsDto> news = newsService.getNews(keyword, page);
+
+        // LOG THE NUMBER OF NEWS ARTICLES RETURNED
+        logger.info("Returning {} news articles for city: {} on page: {}", news.size(), keyword, page);
+
+        // RETURN THE NEWS ARTICLES IN THE HTTP RESPONSE
+        return ResponseEntity.ok(news);
     }
 }
